@@ -1,5 +1,5 @@
 //NPC class
-class NPC
+public class NPC
 {
 
 }

@@ -1,0 +1,5 @@
+//NPC class
+class NPC
+{
+
+}

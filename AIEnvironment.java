@@ -83,7 +83,7 @@ public class AIEnvironment {
 	{
 		boolean hired = false;
 		Scanner keyboard = new Scanner(System.in);
-		System.out.println("Are you sure, you want to hire Xyz? (y/n)");
+		System.out.println("Are you sure you want to hire Xyz? (y/n)");
 		char input = keyboard.next().charAt(0);
 		if(input == 'y')
 		{
@@ -103,7 +103,7 @@ public class AIEnvironment {
 		boolean fired = false;
 
 		Scanner keyboard = new Scanner(System.in);
-		System.out.println("Are you sure, you want to fire Xyz? (y/n)");
+		System.out.println("Are you sure you want to fire Xyz? (y/n)");
 		char input = keyboard.next().charAt(0);
 		if(input == 'y')
 		{

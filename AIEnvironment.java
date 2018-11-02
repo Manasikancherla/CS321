@@ -1,7 +1,7 @@
-
+import java.util.Scanner;
 public class AIEnvironment {
 
-	public void runAll()
+	public void randomEventTrigger()
 	{
 		sick();
 		marriage();
@@ -79,7 +79,44 @@ public class AIEnvironment {
 		
 		return result;
 	}
+		public boolean hireEmployee()
+	{
+		boolean hired = false;
+		Scanner keyboard = new Scanner(System.in);
+		System.out.println("Are you sure, you want to hire Xyz? (y/n)");
+		char input = keyboard.next().charAt(0);
+		if(input == 'y')
+		{
+			// add method from Enviroment class
+			System.out.println("Xyz was hired");
+			hired = true;
+		}
+		else if(input == 'n')
+			System.out.println("Xyz was not hired");
+		else
+			System.out.println("Wrong input");
+		return hired;
+	}
 	
+	public boolean fireEmployee()
+	{
+		boolean fired = false;
+
+		Scanner keyboard = new Scanner(System.in);
+		System.out.println("Are you sure, you want to fire Xyz? (y/n)");
+		char input = keyboard.next().charAt(0);
+		if(input == 'y')
+		{
+			// remove method from Enviroment class
+			System.out.println("Xyz was fired");
+			fired = true;
+		}
+		else if(input == 'n')
+			System.out.println("Xyz was not fired");
+		else
+			System.out.println("Wrong input");
+		return fired;
+	}
 	public static void main (String[] args)
 	{
 		EnviAi obj = new EnviAi();
@@ -87,7 +124,7 @@ public class AIEnvironment {
 		for(int i=1; i<=5; i++)
 		{
 			System.out.println("Run number: "+i);
-			obj.runAll();
+			obj.randomEventTrigger();
 			System.out.println("-------------------------------------------");
 		}
 	}

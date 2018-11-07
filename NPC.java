@@ -1,44 +1,63 @@
-import java.util.io;
 //NPC class
 public class NPC
 {
-    int productivity; //Productivity level (1-5)
-    int mood; //Mood level (1-5)
-    int age; //Age (19-72)
-    int health; //Health level (1-5)
-    char[] name; //Name of NPC
-    char[] marital_status; //Single, Engaaged, Married
-    float salary; //Current salary of the employee
-    int leaves; //Number of leaves
+    String name; //Name of NPC
+    private int enthusiasm; //Productivity level (1-6)
+    private int level; //Experience level (1-9)
+    private int health; //Health level (1-100)
+    private Boolean leave; //Candidate for taking days off
+    private double salary; //Current salary of the employee
 
-    void assignName(char[] newName)//Assigns name for the NPC player
-    {
-        this.name = newName;
-    }
-
-    void assignAge(int newAge)
-    {
+    public NPC(){
 
     }
-
-    void alterProductivityandModd(int levelOfProductivity)
-    {
-
+    public String getName() {
+        return name;
     }
 
-    void alterMaritalStatus(char[] newStatus)
-    {
-
+    public void setName(String name) {
+        this.name = name;
     }
 
-    void takeLeave(int numberofDays)
-    {
-
+    public int getEnthusiasm() {
+        return enthusiasm;
     }
 
-    void changeSalary(float newSalary)
-    {
-
+    public void setEnthusiasm(int enthusiasm) {
+        this.enthusiasm = enthusiasm;
     }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public Boolean getLeave() {
+        return leave;
+    }
+
+    public void setLeave(Boolean leave) {
+        this.leave = leave;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
 
 }

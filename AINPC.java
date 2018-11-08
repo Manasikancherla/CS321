@@ -2,42 +2,112 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 public class AINPC extends NPC{
-    ArrayList<String> names = new ArrayList<String>();
+    ArrayList<NPC> npc = new ArrayList<NPC>();
+    /**
+     * Constructor for NPCAI
+     * This generates a set amount of randomized NPCs
+     * The STATS of each NPC will be randomized along with a list of random names
+     * @throws FileNotFoundException
+     */
     public AINPC() throws FileNotFoundException{
-    Scanner scanner = new Scanner(new File("names.txt"));
+    		Scanner scanner = new Scanner(new File("names.txt"));
         while(scanner.hasNext()){
-        names.add(scanner.next());
+        npc.add( createNPC(scanner.next() ) );
         }
+        scanner.close();
     }
-    private NPC createNPC(){
-        NPC human = new NPC();
-        return human;
-    }
-    private NPC baseStats(NPC human){
-    	
+    /**
+     * Generates a NPC with a given name and random STATs and returns it
+     * @param name the name that will be given to the NPC
+     * @return returns a generated NPC object
+     */
+    private NPC createNPC(String name){
+    		NPC human = new NPC();
         int level = (int) (Math.random() * 5 +3);
-        human.setName(names.remove((int)(Math.random() * names.size())));
+        human.setName(name);
         human.setLevel(level);
         human.setHealth(100);
         human.setLeave(false);
         human.setSalary((20000 * level ) / 12.0);
         return human;
     }
+    /**
+     * Pulls out a random NPC and removes it from the lists
+     * @return returns a NPC object
+     */
+    public NPC getNPC() {
+        return npc.remove( ( (int) Math.random() * npc.size() ) );
+    }
+    /**
+     * A number that will affect the development speed of the game
+     * @param human takes in a human NPC and calculates a number with its current STATs
+     * @return returns a double, the magic number
+     */
     public double getMagic(NPC human){
 
         return ( ( (100) * ( (35 + human.getLevel() ) + (5 * human.getEnthusiasm() ) ) ) /
                     ( human.getHealth() - ( human.getLeave() ? 4.0 : 0.0 ) ) );
-        }
-    private void changeSalary(double change, NPC human){
-        human.setSalary(human.getSalary() + change);
-        human.setEnthusiasm(change >= 0 ?
-        (human.getEnthusiasm() != 6 ? human.getEnthusiasm() + 1 : human.getEnthusiasm()) : human.getEnthusiasm() -1);
     }
-    private void levelup(NPC human){
+    /**
+     * Increases the enthusiasm of the selected NPC
+     * @param human NPC object
+     */
+    public void increaseEnthusiasm(NPC human) {
+    		human.setEnthusiasm(human.getEnthusiasm() ==6 ? human.getEnthusiasm() : human.getEnthusiasm() - 1);
+    }
+    /**
+     * Decreases the enthusiasm of the selected NPC
+     * @param human NPC object
+     */
+    public void decreaseEnthusiasm(NPC human) {
+    		human.setEnthusiasm(human.getEnthusiasm() - 1);
+    }
+    /**
+     * Decreases the health of everyone on the team
+     * If a NPC is below a certain health the leave flag will trigger
+     * @param team takes in the development team
+     */
+    public void decayHealth(ArrayList<NPC> team) {
+    		for(NPC human: team) {
+    			human.setHealth(human.getHealth() - 1);
+    				human.setLeave(human.getHealth() <= 55 ? true : false);	
+    		}
+    }
+    /**
+     * Levels up the selected NPC
+     * @param human NPC object
+     */
+    public void levelUp(NPC human){
         human.setLevel(human.getLevel() + 1);
-        human.setHealth(100);
-        human.setEnthusiasm(human.getEnthusiasm() != 6 ? human.getEnthusiasm() + 1 : human.getEnthusiasm());
     }
-   
+    /**
+     * Levels down the selected NPC
+     * @param human NPC object
+     */
+    public void leveldown(NPC human){
+        human.setLevel(human.getLevel() - 1);
+    }
+    /**
+     * Increases the salary of the selected NPC
+     * @param human NPC object
+     */
+    public void increaseSalary(NPC human){
+        human.setSalary(human.getSalary() + ( (int) ( (Math.random() * 9 + 1) * 1000 ) ) );
+    }
+    /**
+     * decreases the salary of the selected NPC
+     * @param human NPC object
+     */
+    public void decreaseSalary(NPC human){
+    		human.setSalary(human.getSalary() + ( (int) ( (Math.random() * 9 + 1) * 1000 ) ) );
+    }
+    /**
+     * Evaluates an event and changes the STATs of the team members
+     * @param team Takes in the development team
+     * @param event the event is in the format of a string
+     * @return
+     */
+    public ArrayList<NPC> evaluateEvent(ArrayList<NPC> team, String event) {		
+    		return null;
+    }
 }
-

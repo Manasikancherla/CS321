@@ -4,7 +4,8 @@ public class NPC
     String name; //Name of NPC
     private int enthusiasm; //Productivity level (1-6)
     private int level; //Experience level (1-9)
-    private int health; //Health level (1-100)
+    private int health; //Health level (1-100) 
+    private int mood; //Mood level 
     private Boolean leave; //Candidate for taking days off
     private double salary; //Current salary of the employee
 
@@ -59,5 +60,9 @@ public class NPC
         this.salary = salary;
     }
 
+    public void displayStats(){
+    System.out.println("\nName:"+this.name+"\");
+    }
+    
 
 }

@@ -39,6 +39,8 @@ public class AINPC extends NPC{
         human.setHealth(100);
         human.setEnthusiasm(human.getEnthusiasm() != 6 ? human.getEnthusiasm() + 1 : human.getEnthusiasm());
     }
+    
+    //public??private?? void setnames();
 
 }
 

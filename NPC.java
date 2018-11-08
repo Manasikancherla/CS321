@@ -60,7 +60,7 @@ public class NPC
     }
 
     public void displayStats(){
-    System.out.println("\nName:"+this.name);
+    System.out.println("\nName:"+this.name+"\nLevel:"+this.level+"\nEnthusiasm"+this.enthusiasm);
     }
     
 

@@ -108,6 +108,24 @@ public class AINPC extends NPC{
      * @return
      */
     public ArrayList<NPC> evaluateEvent(ArrayList<NPC> team, String event) {		
-    		return null;
+    	int member = (int)Math.random()*team.size();
+        NPC dummy = (NPC)team.get(member).clone();
+        
+        if(event.charAt(0) == '+'&&team.get(member))
+            dummy.setEnthusiasm(dummy.getEnthusiasm()+1);
+        else if(event.charAt(0) == '-')
+            dummy.setEnthusiasm(dummy.getEnthusiasm()-1);
+        
+        if(event.charAt(1) == '-')
+        {
+            if(dummy.getHealth>39)
+                dummy.setHealth((int)dummy.getHealth()*0.75);
+            else
+                dummy.setHealth(30);
+                printf(dummy.getName()+" is in critical condition. Needs to be fired immediately.\n");
+        }
+            
+        team.get(member) = (NPC)dummy.clone();
+        return team;
     }
 }

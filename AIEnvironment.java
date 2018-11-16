@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 public class AIEnvironment {
 
 	private double budget = 0;

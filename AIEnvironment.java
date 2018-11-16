@@ -1,85 +1,18 @@
 import java.util.Scanner;
 public class AIEnvironment {
 
-	public void randomEventTrigger()
-	{
-		sick();
-		marriage();
-		vacation();
-		timeOff();
-	}
-	public boolean sick()
-	{
-		int chance = (int) (Math.random()*100)+1;
-		boolean result = false;
+	private double budget = 0;
+	private int days = 0;
+	private double goal = 0;
 
-		if(chance >0 && chance<=60)
-			System.out.println("No one is sick (60%)");
-		else if(chance>60 && chance<=100)
-			{
-			System.out.println("Someone is sick (40%)");
-			result = true;
-			}	
-		else
-			System.out.println("fked up");
-		
-			return result;
-	}
-	
-	public boolean vacation()
+	public EnviAi()
 	{
-		int chance = (int) (Math.random()*100+1);
-		boolean result = false;
-		
-		if(chance >0 && chance<=80)
-			System.out.println("No one is going on vacation (80%)");
-		else if(chance>80 && chance<=100)
-			{
-			System.out.println("Someone is going on vacation (20%)");
-			result = true;
-			}	
-		else
-			System.out.println("fked up");
-		
-		return result;
+		this.days = 0;
+		this.budget = 0;
+		this.goal = 0;
 	}
-	
-	public boolean marriage()
-	{
-		int chance = (int) (Math.random()*100)+1;
-		boolean result = false;
-		
-		if(chance >0 && chance<=90)
-			System.out.println("No one is getting married (90%)");
-		else if(chance>90 && chance<=100)
-			{
-			System.out.println("Someone is getting married (10%)");
-			result = true;
-			}	
-		else
-			System.out.println("fked up");
-		
-		return result;
-	}
-	
-	public boolean timeOff()
-	{
-		int chance = (int) (Math.random()*100)+1;
-		boolean result = false;
-		
-		if(chance >0 && chance<=70)
-			System.out.println("No one has requested time off (70%)");
-		else if(chance>70 && chance<=100)
-			{
-			System.out.println("Someone has requested time off(30%)");
-			result = true;
-			}	
-		else
-			System.out.println("fked up");
-		
-		return result;
-	}
-		public boolean hireEmployee()
+
+	public boolean hireEmployee()
 	{
 		boolean hired = false;
 		Scanner keyboard = new Scanner(System.in);
@@ -93,6 +26,7 @@ public class AIEnvironment {
 		}
 		else if(input == 'n')
 			System.out.println("Xyz was not hired");
+		
 		else
 			System.out.println("Wrong input");
 		return hired;
@@ -113,19 +47,86 @@ public class AIEnvironment {
 		}
 		else if(input == 'n')
 			System.out.println("Xyz was not fired");
+		
 		else
 			System.out.println("Wrong input");
 		return fired;
 	}
-	public static void main (String[] args)
+	
+	public boolean createProject()
 	{
-		EnviAi obj = new EnviAi();
+		boolean created = false;
+		// avg income of developers per year 105k
+		budget = (105000/365) * 9;  // avg divided by days in a year and multiply by max # of devs
 		
-		for(int i=1; i<=5; i++)
+		days = (int)(Math.random()*180)+1;
+		days = 7;   // FOR TESTING PURPOSES ONLY
+		// final budget + extra
+		budget = (budget*days) + (50*days);
+		
+		// 4 avg productivity * 9 max # devs * # of days
+		goal = 4*9*days;
+		created = true;
+		return created;
+	}
+	
+	public String createEvent() throws FileNotFoundException
+	{
+		Scanner events = new Scanner(new File("events.txt"));
+		String result;
+		int percentage;
+		int probability;
+		String message;
+		while(events.hasNext())
 		{
-			System.out.println("Run number: "+i);
-			obj.randomEventTrigger();
-			System.out.println("-------------------------------------------");
+			result = events.next();
+			percentage = Integer.parseInt(events.next());
+			message = events.nextLine();
+			probability = (int) (Math.random()*100)+1;
+			if(probability<=percentage)
+			{
+				// pick npc?
+				System.out.println(message);
+ 				System.out.println(result);  // test purpose only
+				return result;
+			}
 		}
+		
+		return "1****";
+	}
+	public void update(int d, double b, double g)
+	{
+		this.days -= d;
+		this.budget -= b;
+		this.goal -= g;
+	}
+	public void setDays(int newDays)
+	{
+		this.days = newDays;
+	}
+	
+	public void setBudget(double newBudget)
+	{
+		this.budget = newBudget;
+	}
+	
+	public void setGoal(double newGoal)
+	{
+		this.goal = newGoal;
+	}
+	
+	public int getDays()
+	{
+		return this.days;
+	}
+	
+	public double getBudget()
+	{
+		return this.budget;
+	}
+	
+	public double getGoal()
+	{
+		return this.goal;
 	}
 }

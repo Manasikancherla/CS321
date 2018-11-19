@@ -35,18 +35,28 @@ public class AINPC extends NPC{
      * Pulls out a random NPC and removes it from the lists
      * @return returns a NPC object
      */
-    public NPC getNPC() {
-        return npc.remove( ( (int) Math.random() * npc.size() ) );
+    public ArrayList<NPC> getNPC() {
+        return npc;
     }
     /**
      * A number that will affect the development speed of the game
      * @param human takes in a human NPC and calculates a number with its current STATs
      * @return returns a double, the magic number
      */
-    public double getMagic(NPC human){
-
+    private double getMagic(NPC human){
+        
         return ( ( (100) * ( (35 + human.getLevel() ) + (5 * human.getEnthusiasm() ) ) ) /
                     ( human.getHealth() - ( human.getLeave() ? 4.0 : 0.0 ) ) );
+    }
+    
+    public double getContribution(ArrayList<NPC> team)
+    {
+        double contribution = 0.0;
+        for(NPC member : team)
+        {
+            contribution += getMagic(member);
+        }
+        return contribution;
     }
     /**
      * Increases the enthusiasm of the selected NPC
@@ -107,16 +117,37 @@ public class AINPC extends NPC{
      * @param event the event is in the format of a string
      * @return
      */
-    public ArrayList<NPC> evaluateEvent(ArrayList<NPC> team, String event) {		
-    	int member = (int)Math.random()*team.size();
+    public void evaluateEvent(ArrayList<NPC> team, String event) {
+        switch(event.charAt(0))
+        {
+            case '0': return team;
+            
+            case '1':
+                int member = (int)(Math.random()*team.size );
+               switch(event.charAt(1)){
+                        
+                        case'-':
+                            team.get(member).
+                        case'+':
+                        
+                        case'*':
+               }
+              
+              
+            case '2':
+                for(NPC mem: team)
+                {
+                }
+        }
+    	/*int member = (int)Math.random()*team.size();
         NPC dummy = (NPC)team.get(member).clone();
         
-        if(event.charAt(0) == '+'&&team.get(member))
+        if(event.charAt(1) == '+'&&team.get(member))
             dummy.setEnthusiasm(dummy.getEnthusiasm()+1);
-        else if(event.charAt(0) == '-')
+        else if(event.charAt(1) == '-')
             dummy.setEnthusiasm(dummy.getEnthusiasm()-1);
         
-        if(event.charAt(1) == '-')
+        if(event.charAt(2) == '-')
         {
             if(dummy.getHealth>39)
                 dummy.setHealth((int)dummy.getHealth()*0.75);
@@ -125,7 +156,7 @@ public class AINPC extends NPC{
                 printf(dummy.getName()+" is in critical condition. Needs to be fired immediately.\n");
         }
             
-        team.get(member) = (NPC)dummy.clone();
+        team.get(member) = (NPC)dummy.clone();*/
         return team;
     }
 }

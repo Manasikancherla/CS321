@@ -6,18 +6,24 @@ public Arraylist<NPC> atOffice = new Arraylist<NPC>();
 public Arraylist<NPC> outToday = new Arraylist<NPC>();
 private Arraylist<NPC> team;
   
-public hire(NPC n){
+public boolean hire(NPC n){
   team.add(n);
   atOffice.add(n);
+  return true;
 }
   
-public fire(NPC n){
+public boolean fire(NPC n){
   team.remove(n);
   if (atOffice.contains(n)){
     atOffice.remove(n);
+    return true;
   }
   else if (outToday.contains(n)){
     outToday.remove(n);
+    return true;
+  }
+  else {
+    return false;
   }
 }
   
@@ -69,7 +75,7 @@ public void displayProgess(){
 }
   
 public void nextDay(){
-  daysPast++;
+  AIEnvironment.update(1, 0, 0);
   System.out.println("");
   System.out.println("");
   System.out.println("");
@@ -88,7 +94,7 @@ public void nextDay(){
   System.out.println("");
   System.out.println("");
   System.out.println("");
-  writeEvent();
+  //writeEvent();
 }
   
 public String displayTeam(){

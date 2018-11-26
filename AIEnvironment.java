@@ -74,17 +74,28 @@ public class AIEnvironment{
 	 		print out the progress
 	 		use game.getProgress();
 		 */
+		System.out.println("Total Progress: " + game.getProgress() + "%");
 	}
 	public void displayHire() {
 		/*
 		 	print out a list of the candidates to be hired
 		 	use game.getHire();
 		 */
+		ArrayList<NPC> toHire = new ArrayList<NPC>();
+		toHire = game.getHire();
+		for (NPC n : toHire){
+			System.out.println(n.getName());
+		}
 	}
 	public void displayTeam() {
 		/*
 		 print out a list of all the team members
 		 */
+		ArrayList<NPC> employees = new ArrayList<NPC>();
+		employees = game.getTeam();
+		for (NPC n : employees){
+			System.out.println(n.getName());
+		}
 	}
 	public void showBoost() {
 		/*

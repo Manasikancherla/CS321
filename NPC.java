@@ -69,7 +69,7 @@ public class NPC{
 
     //Displays the statistics of the NPC
     public void displayStats(){
-    System.out.println("\nName:"+this.name+"\nLevel:"+this.level+"\nEnthusiasm"+this.enthusiasm+"\nHealth"+this.health+"\nSalary"+this.salary);
+    System.out.println("\nName: "+this.name+"\nLevel: "+this.level+"\nEnthusiasm: "+this.enthusiasm+"\nHealth: "+this.health+"\nSalary: "+this.salary);
     }
    
 }

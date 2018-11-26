@@ -13,6 +13,7 @@ public class Environment {
 	double progress;
 	double totalProgress;
 	int time;
+	int timeframe;
 	
 	/**
 	 * Constructor for environment
@@ -70,11 +71,25 @@ public class Environment {
 		return time;
 	}
 	/**
+	 * Getter for total to complete the project
+	 * @return integer
+	 */
+	public int getTimeframe() {
+		return timeframe;
+	}
+	/**
 	 * Getter for progress
 	 * @return double
 	 */
 	public double getProgress() {
 		return progress;
+	}
+	/**
+	 * Getter for total progress to complete the project
+	 * @return double
+	 */
+	public double getTotalProgress() {
+		return totalProgress;
 	}
 	/**
 	 * Hires the NPC

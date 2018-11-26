@@ -61,8 +61,9 @@ public class AgileExtreme {
     				case "rest":			
     					while(true) {
     						System.out.println("\nWhich NPC would you like to give a break to? (Name of NPC)");
+    						game.displayTeam();
     						command = scanner.next();
-						if(command.equals("zack")/*game.rest(command)*/) {
+						if(game.rest(command)) {
 							System.out.println("\n" + command + " will be off for the next few days.");
 							break;
 						}else if(command.equals("quit")){
@@ -84,7 +85,7 @@ public class AgileExtreme {
     						command = scanner.next();
     						if(command.equals("yes")) {
     							System.out.println("\nHere are a few options that may motivate the team!");
-    							//game.displayBoost
+    							game.showBoost();
     							System.out.println("Please pick one.");		
     							switch(scanner.nextInt()) {
     								case 1:  									
@@ -124,7 +125,7 @@ public class AgileExtreme {
     						}
     					}
     					break;
-    				case "buget":	
+    				case "budget":	
     					System.out.println("\nYour current buget is a small loan of a million");
     					game.displayBudget();
     					break;

@@ -177,7 +177,24 @@ public class AIEnvironment{
 		 	check if the game is complete
 		 	use game.getProgress to get a value that decrease over time and use that to determine when the game is complete
 		 */
+		int temp = (int) (Math.random()*events.size());
+		String s = events.get(temp).substring(0, 5);
+		int percentage = Integer.parseInt(events.get(temp).substring(6, 8));
+		String message = events.get(0).substring(temp);
 		
+		int probability = (int)(Math.random()*100)+1;
+		temp = (int)(Math.random()*game.team.size());
+		
+		if(probability<=percentage)
+		{
+			System.out.println(game.team.get(temp).name+""+message);
+			game.triggerEvent(s);
+		}
+		else
+			System.out.println("No Event!");
+		if(!running())
+			System.out.println("Game Over.");
+
 		
 		//This updates time, list of hire, everyone that is on the team and sick, budget, and progress
 		game.update();	

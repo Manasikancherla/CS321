@@ -197,7 +197,7 @@ public class AIEnvironment{
 		int temp = (int) (Math.random()*events.size());
 		String s = events.get(temp).substring(0, 5);
 		int percentage = Integer.parseInt(events.get(temp).substring(6, 8));
-		String message = events.get(temp).substring(temp);
+		String message = events.get(temp).substring(9);
 		
 		int probability = (int)(Math.random()*100)+1;
 		temp = (int)(Math.random()*game.team.size());

@@ -150,62 +150,81 @@ public class AINPC extends NPC{
             case '0': return team;
             
             case '1':
-                int member = (int)(Math.random()*team.size );
-               switch(event.charAt(1)){
-                        case'-':decreaseEnthusiasm(team.get(member));
-			    	break;
+			int member = (int)(Math.random()*team.size );
+               		switch(event.charAt(1))
+			{
+                        	case'-':decreaseEnthusiasm(team.get(member));
+			    		break;
 			       
-                        case'+':increaseEnthusiasm(team.get(member));
-                        	break;	
-               	}
+                        	case'+':increaseEnthusiasm(team.get(member));
+                        		break;	
+               		}
  	
-		switch(event.charAt(2)){
-			case '+':levelUp(team.get(member));
-				break;
+			switch(event.charAt(2))
+			{
+				case '+':levelUp(team.get(member));
+					break;
 				
-			case '-':levelDown(team.get(member));
-				break;
-		}
+				case '-':levelDown(team.get(member));
+					break;
+			}
               
-		switch(event.charAt(3)){
-			case '+':recoverHealth(team.get(member));
-				break;
+			switch(event.charAt(3))
+			{
+				case '+':recoverHealth(team.get(member));
+					break;
 				
-			case '-':decayHealth(team.get(member));
-				break;
-		}
+				case '-':decayHealth(team.get(member));
+					break;
+			}
 			
-		switch(event.charAt(4)){
-			case '+':increaseSalary(team.get(member));
-				break;
+			switch(event.charAt(4))
+			{
+				case '+':increaseSalary(team.get(member));
+					break;
 				
-			case '-':decreaseSalary(team.get(member));
-				break;
-		}
+				case '-':decreaseSalary(team.get(member));
+					break;
+			}
 			
-            case '2':
-                for(NPC mem: team)
-                {
-                }
-        }
-    		int member = (int)Math.random()*team.size();
-        NPC dummy = (NPC)team.get(member).clone();
-        
-        if(event.charAt(1) == '+'&&team.get(member))
-            dummy.setEnthusiasm(dummy.getEnthusiasm()+1);
-        else if(event.charAt(1) == '-')
-            dummy.setEnthusiasm(dummy.getEnthusiasm()-1);
-        
-        if(event.charAt(2) == '-')
-        {
-            if(dummy.getHealth>39)
-                dummy.setHealth((int)dummy.getHealth()*0.75);
-            else
-                dummy.setHealth(30);
-                printf(dummy.getName()+" is in critical condition. Needs to be fired immediately.\n");
-        }
-       
-        team.get(member) = (NPC)dummy.clone();
-        return team;
-    }
+            	case '2':
+                	for(NPC mem: team)
+                	{
+			 	switch(event.charAt(1))
+			 	{
+                        		case'-':decreaseEnthusiasm(team.get(member));
+			    			break;
+			       
+                        		case'+':increaseEnthusiasm(team.get(member));
+                        			break;	
+               		 	}
+ 	
+				switch(event.charAt(2))
+				{
+					case '+':levelUp(team.get(member));
+						break;
+				
+					case '-':levelDown(team.get(member));
+						break;
+				}
+              
+				switch(event.charAt(3))
+				{
+					case '+':recoverHealth(team.get(member));
+						break;
+				
+					case '-':decayHealth(team.get(member));
+						break;
+				}
+			
+				switch(event.charAt(4)){
+					case '+':increaseSalary(team.get(member));
+						break;
+				
+					case '-':decreaseSalary(team.get(member));
+						break;
+				}
+                	}
+        	}
+    	}
 }

@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class AIEnvironment{
-	String events[];
+	ArrayList<String> events;
 	ArrayList<NPC> allNPC;
 	Environment game;
 	boolean active;
@@ -16,7 +16,7 @@ public class AIEnvironment{
 	 	Scanner to fill in events
 		 */
 		active = true;
-		events = null;
+		events = new ArrayList<String>();
 		game = new Environment();
 	}
 	public boolean hire(String name) {
@@ -113,6 +113,10 @@ public class AIEnvironment{
 		/*
 		 	Show the three boost events you created
 		 */
+		System.out.println("1: Throw a party for the whole team ($1k).");
+		System.out.println("2: Promote someone in the team ($15k).");
+		System.out.println("3: Buy a new Espresso machine for the office ($25k).");
+	
 	}
 	public boolean useBoost(int selection) {
 		/*
@@ -123,6 +127,27 @@ public class AIEnvironment{
 		 selection will be from 1 to 3 inclusive
 		 also print the effect when used
 		 */
+		switch(selection)
+		{
+		case 1: 	if(game.budget<1000) {
+					return false;
+				}
+				game.triggerEvent("2+***");
+				game.deacreaseBudget(1000);
+				return true;
+		case 2: 	if(game.budget<1000) {
+					return false;
+				}		
+				game.triggerEvent("1*+**");
+				game.deacreaseBudget(15000);
+				return true;
+		case 3: 	if(game.budget<1000) {
+					return false;
+				}
+				game.triggerEvent("2+*+*");
+				game.deacreaseBudget(25000);
+				return true;
+		}
 		return false;
 	}
 	public boolean running() {

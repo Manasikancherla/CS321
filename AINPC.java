@@ -91,7 +91,7 @@ public class AINPC extends NPC{
      * If a NPC is above a certain health the leave flag will trigger
      * @param team takes in the development team
      */
-    public void RecoverHealth(ArrayList<NPC> team) {
+    public void recoverHealth(ArrayList<NPC> team) {
 		for(NPC human: team) {
 			human.setHealth(human.getHealth() - ((int)(Math.random()*3 + 8)));
 				human.setLeave(human.getHealth() >= 80 ? false : true);	
@@ -108,7 +108,7 @@ public class AINPC extends NPC{
      * Levels down the selected NPC
      * @param human NPC object
      */
-    public void leveldown(NPC human){
+    public void levelDown(NPC human){
         human.setLevel(human.getLevel() - 1);
     }
     /**
@@ -144,24 +144,45 @@ public class AINPC extends NPC{
      * @param event the event is in the format of a string
      * @return
      */
-    public void evaluateEvent(ArrayList<NPC> team, String event) {
-        /*
-    		switch(event.charAt(0))
+    public void evaluateEvent(ArrayList<NPC> team, String event) {       
+ 	switch(event.charAt(0))
         {
             case '0': return team;
             
             case '1':
                 int member = (int)(Math.random()*team.size );
                switch(event.charAt(1)){
-                        
-                        case'-':
-                            team.get(member).
-                        case'+':
-                        
-                        case'*':
-               }
+                        case'-':decreaseEnthusiasm(team.get(member));
+			    	break;
+			       
+                        case'+':increaseEnthusiasm(team.get(member));
+                        	break;	
+               	}
+ 	
+		switch(event.charAt(2)){
+			case '+':levelUp(team.get(member));
+				break;
+				
+			case '-':levelDown(team.get(member));
+				break;
+		}
               
-              
+		switch(event.charAt(3)){
+			case '+':recoverHealth(team.get(member));
+				break;
+				
+			case '-':decayHealth(team.get(member));
+				break;
+		}
+			
+		switch(event.charAt(4)){
+			case '+':increaseSalary(team.get(member));
+				break;
+				
+			case '-':decreaseSalary(team.get(member));
+				break;
+		}
+			
             case '2':
                 for(NPC mem: team)
                 {
@@ -183,9 +204,8 @@ public class AINPC extends NPC{
                 dummy.setHealth(30);
                 printf(dummy.getName()+" is in critical condition. Needs to be fired immediately.\n");
         }
-            
+       
         team.get(member) = (NPC)dummy.clone();
         return team;
-        */
     }
 }

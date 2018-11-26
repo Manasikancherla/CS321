@@ -11,6 +11,7 @@ public class Environment {
 	
 	double budget;
 	double progress;
+	double totalProgress;
 	int time;
 	
 	/**
@@ -22,7 +23,8 @@ public class Environment {
 		population = people.getNPC();
 		//Small Loan of a million
 		budget = 1000000; 
-		progress = 100;
+		totalProgress = 100;
+		progress = 0;
 		time = 1;
 	}
 	/**
@@ -172,5 +174,22 @@ public class Environment {
 		checkRecover();
 		//Increments the day
 		time++;	
-	}	
+	}
+	
+	public boolean createProject()
+	{
+		boolean created = false;
+		// avg income of developers per year 120k
+		budget = (120000/365) * 9;  // avg divided by days in a year and multiply by max # of devs
+		
+		time = (int)(Math.random()*180)+7;
+		time = 7;   // FOR TESTING PURPOSES ONLY
+		// final budget + extra
+		budget = (budget*days) + (50*days);
+		
+		// 4 avg productivity * 9 max # devs * # of days
+		totalProgress = 4*9*time;
+		created = true;
+		return created;
+	}
 }

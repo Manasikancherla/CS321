@@ -47,6 +47,7 @@ public class AIEnvironment{
 		/*
 		  	print out the budget;
 		 */
+		System.out.println("Budget: " + game.getBudget());
 	}
 	public void displayStats() {
 		/*
@@ -54,6 +55,16 @@ public class AIEnvironment{
 		 	also print out the ones in the sick group
 		 	use game.getTeam(); and npc.getStats
 		 */
+		ArrayList<NPC> employees = new ArrayList<NPC>();
+		employees = game.getTeam();
+		ArrayList<NPC> sickEmployees = new ArrayList<NPC>();
+		sickEmployees = game.getSick();
+		for (NPC npc : employees){
+			npc.getStats();
+		}
+		for (NPC npc : sickEmployees){
+			npc.getStats();
+		}
 	}
 	public void displayTime() {
 		/*

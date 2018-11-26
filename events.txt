@@ -3,13 +3,13 @@
 1+*+* 20 requested time off.
 1+*+* 20 is going on vacation.
 1-*-* 10 is having a baby.
-2+*** 20 It's a beautiful day outside and everyone seems a little happier than usual (+)
-1+*-* 10 's child is graduating today and will not come in. (+)
-2-*** 20 It's a rainy day and everybody seems tired and gloomy (-)
-2-*** 10 It's snowing like crazy and everyone had a hard time coming in. (-)
-1-*-* 10 's car broke down on the way here and can't make it in (-)
-1-*-* 10 had a death in the family and will not be coming in (-)
-2-*** 10 There's a sudden power outage and it takes a while to get it back on. Everyone is a little annoyed. (-)
+2+*** 20 It's a beautiful day outside and everyone seems a little happier than usual.
+1+*-* 10 's child is graduating today and will not come in.
+2-*** 20 It's a rainy day and everybody seems tired and gloomy.
+2-*** 10 It's snowing like crazy and everyone had a hard time coming in.
+1-*-* 10 's car broke down on the way here and can't make it in.
+1-*-* 10 had a death in the family and will not be coming in.
+2-*** 10 There's a sudden power outage and it takes a while to get it back on. Everyone is a little annoyed.
 0**** blank event
 0**** blank event
 0**** blank event

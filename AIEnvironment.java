@@ -12,62 +12,55 @@ public class AIEnvironment{
 	 * @throws FileNotFoundException 
 	 */
 	public AIEnvironment() throws FileNotFoundException {
-		Scanner in = new Scanner(new File("events.txt"));
-		String eventString;
-		while(in.hasNext())
-		{
-			eventString = in.nextLine();
-			events.add(eventString);
-		}
-		in.close();
 		active = true;
 		events = new ArrayList<String>();
 		game = new Environment();
 		allNPC = game.getPopulation();
-		//Eric
-		game.hire(allNPC.get(0));
-		//Manasi
-		game.hire(allNPC.get(1));
-		//Adam
-		game.hire(allNPC.get(2));
-		//Renzo
-		game.hire(allNPC.get(3));
+		Scanner in = new Scanner(new File("events.txt"));
+		while(in.hasNextLine())
+		{
+			in.nextLine();
+			events.add(in.nextLine());
+		}
+		in.close();
 	}
 	
 	public boolean hire(String name) {
-		NPC person = null;
-		/*
-		  	find the npc in allNPC
-		 */
-		for(int i=0; i<allNPC.size(); i++)
+		for(int i = 0; i<game.getHire().size(); i++)
 		{
-			if(allNPC.get(i).getName().equals(name))
+			if(game.getHire().get(i).getName().equals(name))
 			{
-				person = allNPC.get(i);
+				return game.hire(game.getHire().get(i));
 			}
 		}		
-		return game.hire(person);	
+		return false;
 	}
 	public boolean fire(String name) {
 		NPC person = null;
 		/*
 		  	find the npc in allNPC
 		 */
-		for(int i=0; i<allNPC.size(); i++)
+		for(int i=0; i<game.getTeam().size(); i++)
 		{
-			if(allNPC.get(i).getName().equals(name))
+			if(game.getTeam().get(i).getName().equals(name))
 			{
-				person = allNPC.get(i);
+				person = game.getTeam().get(i);
 			}
 		}		
 		return game.fire(person);
 	}
 	public boolean rest(String name) {
-		NPC person = null;
 		/*
 		  	find the npc in allNPC
 		 */
-		return game.giveBreak(person);
+		for(int i=0; i<game.getTeam().size(); i++)
+		{
+			if(game.getTeam().get(i).getName().equals(name))
+			{
+				return game.giveBreak(game.getTeam().get(i));
+			}
+		}
+		return false; 
 	}
 	public int getTime() {
 		return game.getTime();
@@ -84,9 +77,11 @@ public class AIEnvironment{
 		 	also print out the ones in the sick group
 		 	use game.getTeam(); and npc.getStats
 		 */
+		
 		for (NPC npc : game.getTeam()){
 			npc.displayStats();
 		}
+		System.out.println("\nThese members are on break at the momement");
 		for (NPC npc : game.getSick()){
 			npc.displayStats();
 		}
@@ -111,7 +106,7 @@ public class AIEnvironment{
 	 		print out the progress
 	 		use game.getProgress();
 		 */
-		System.out.println("Total Progress: " + game.getProgress()/game.getTotalProgress() + "%");
+		System.out.println("Total Progress: " + game.getProgress()/game.getTotalProgress() * 100 + "%");
 	}
 	public void displayHire() {
 		/*
@@ -182,7 +177,7 @@ public class AIEnvironment{
 			//lose game when you run out of money
 			active = false;
 		}
-		else if (game.getDeadLine() > game.getTime()){
+		else if (game.getDeadLine() < game.getTime()){
 			//lose game when you run out of time
 			active = false;
 		}
@@ -202,14 +197,14 @@ public class AIEnvironment{
 		int temp = (int) (Math.random()*events.size());
 		String s = events.get(temp).substring(0, 5);
 		int percentage = Integer.parseInt(events.get(temp).substring(6, 8));
-		String message = events.get(0).substring(temp);
+		String message = events.get(temp).substring(temp);
 		
 		int probability = (int)(Math.random()*100)+1;
 		temp = (int)(Math.random()*game.team.size());
 		
-		if(probability<=percentage)
+		if(probability>=percentage)
 		{
-			System.out.println(game.team.get(temp).name+""+message);
+			System.out.println(game.team.get(temp).name+""+ message.substring(8));
 			game.triggerEvent(s);
 		}
 		else

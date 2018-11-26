@@ -204,8 +204,16 @@ public class AIEnvironment{
 		
 		if(probability>=percentage)
 		{
-			System.out.println(game.team.get(temp).name+""+ message.substring(8));
-			game.triggerEvent(s);
+			if(s.charAt(0) == '1')
+			{
+				System.out.println(game.team.get(temp2).name+""+message);
+				game.triggerEvent(s);
+			}
+			else
+			{
+				System.out.println(message);
+				game.triggerEvent(s);
+			}
 		}
 		else
 			System.out.println("No Event!");

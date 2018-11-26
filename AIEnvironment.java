@@ -20,11 +20,30 @@ public class AIEnvironment{
 		game = new Environment();
 		allNPC = game.getPopulation();
 	}
+	
+	public void createEvent() throws FileNotFoundException
+	{
+		Scanner in = new Scanner(new File("events.txt"));
+		String eventString;
+		while(in.hasNext())
+		{
+			eventString = in.nextLine();
+			events.add(eventString);
+		}
+		in.close();
+	}
 	public boolean hire(String name) {
 		NPC person = null;
 		/*
 		  	find the npc in allNPC
 		 */
+		for(int i=0; i<allNPC.size(); i++)
+		{
+			if(allNPC.get(i).getName().equals(name))
+			{
+				person = allNPC.get(i);
+			}
+		}		
 		return game.hire(person);	
 	}
 	public boolean fire(String name) {
@@ -32,6 +51,13 @@ public class AIEnvironment{
 		/*
 		  	find the npc in allNPC
 		 */
+		for(int i=0; i<allNPC.size(); i++)
+		{
+			if(allNPC.get(i).getName().equals(name))
+			{
+				person = allNPC.get(i);
+			}
+		}		
 		return game.fire(person);
 	}
 	public boolean rest(String name) {

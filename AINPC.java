@@ -198,24 +198,28 @@ public class AINPC extends NPC{
                 	for(NPC mem: team){
                 		switch(event.charAt(1))
                 		{
-                        	case'-':decreaseEnthusiasm(mem);
-			    				break;
-                        	case'+':increaseEnthusiasm(mem);
-                        		break;	
-               		}
-                		switch(event.charAt(2)){
+                        		case'-':decreaseEnthusiasm(mem);
+			    			break;
+                        		case'+':increaseEnthusiasm(mem);
+                        			break;	
+               			}
+                		switch(event.charAt(2))
+				{
                 			case '+':levelUp(mem);
                 				break;
+						
                 			case '-':levelDown(mem);
                 				break;
                 		}
-                		switch(event.charAt(3)){
+                		switch(event.charAt(3))
+				{
                 			case '+':recoverHealth(mem);
                 				break;
                 			case '-':decayHealth(mem);
                 				break;
                 		}
-                		switch(event.charAt(4)){
+                		switch(event.charAt(4))
+				{
                 			case '+':increaseSalary(mem);
                 				break;			
                 			case '-':decreaseSalary(mem);

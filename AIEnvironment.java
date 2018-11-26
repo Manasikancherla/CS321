@@ -86,7 +86,7 @@ public class AIEnvironment{
 	 		print out the progress
 	 		use game.getProgress();
 		 */
-		System.out.println("Total Progress: " + game.getProgress() + "%");
+		System.out.println("Total Progress: " + game.getProgress()/game.getTotalProgress() + "%");
 	}
 	public void displayHire() {
 		/*

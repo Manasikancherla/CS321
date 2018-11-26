@@ -56,15 +56,11 @@ public class AIEnvironment{
 		 	also print out the ones in the sick group
 		 	use game.getTeam(); and npc.getStats
 		 */
-		ArrayList<NPC> employees = new ArrayList<NPC>();
-		employees = game.getTeam();
-		ArrayList<NPC> sickEmployees = new ArrayList<NPC>();
-		sickEmployees = game.getSick();
-		for (NPC npc : employees){
-			npc.getStats();
+		for (NPC npc : game.getTeam()){
+			npc.displayStats();
 		}
-		for (NPC npc : sickEmployees){
-			npc.getStats();
+		for (NPC npc : game.getSick()){
+			npc.displayStats();
 		}
 	}
 	public void displayTime() {
@@ -72,14 +68,14 @@ public class AIEnvironment{
 			Display the current time/day
 			use game.getTime();
 		 */
-		System.out.println("DAY " + game.getTime());
+		System.out.println("DAY " + game.getTime() );
 	}
-	public void displayTimeframe(){
+	public void displayDeadLine(){
 		/*
 			Display the time remaining to complete the project
 		*/
 		int daysPast = game.getTime();
-		int totalTime = game.getTimeframe();
+		int totalTime = game.getDeadLine();
 		System.out.println("Days Remaining: " + (totalTime-daysPast) + " days");
 	}
 	public void displayProgress() {
@@ -94,9 +90,7 @@ public class AIEnvironment{
 		 	print out a list of the candidates to be hired
 		 	use game.getHire();
 		 */
-		ArrayList<NPC> toHire = new ArrayList<NPC>();
-		toHire = game.getHire();
-		for (NPC n : toHire){
+		for (NPC n : game.getHire()){
 			System.out.println(n.getName());
 		}
 	}
@@ -160,11 +154,11 @@ public class AIEnvironment{
 			//lose game when you run out of money
 			active = false;
 		}
-		else if (game.getTimeframe() > game.getTime()){
+		else if (game.getDeadLine() > game.getTime()){
 			//lose game when you run out of time
 			active = false;
 		}
-		else if (game.getTotalProgress <= game.getProgress){
+		else if (game.getTotalProgress() <= game.getProgress()){
 			//win game when the project is completed
 			active = false;
 		}

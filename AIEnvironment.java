@@ -130,6 +130,18 @@ public class AIEnvironment{
 		  checks if the game is running
 		  change active when you finish the game or quit etc..
 		 */
+		if (game.getBudget() <= 0){
+			//lose game when you run out of money
+			active = false;
+		}
+		else if (game.getTimeframe() > game.getTime()){
+			//lose game when you run out of time
+			active = false;
+		}
+		else if (game.getTotalProgress <= game.getProgress){
+			//win game when the project is completed
+			active = false;
+		}
 		return active;
 	}
 	public void update() {

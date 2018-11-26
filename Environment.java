@@ -13,7 +13,7 @@ public class Environment {
 	double progress;
 	double totalProgress;
 	int time;
-	int timeframe;
+	final int deadline;
 	
 	/**
 	 * Constructor for environment
@@ -27,6 +27,29 @@ public class Environment {
 		totalProgress = 100;
 		progress = 0;
 		time = 1;
+		deadline = 31;
+		newHire();
+		team.add(population.remove(0));
+		team.add(population.remove(0));
+		team.add(population.remove(0));
+		team.add(population.remove(0));
+		
+		
+		/*
+			boolean created = false;
+			// avg income of developers per year 120k
+			budget = ;  // avg divided by days in a year and multiply by max # of devs
+			
+			time = (int)(Math.random()*180)+7;
+			time = 7;   // FOR TESTING PURPOSES ONLY
+			// final budget + extra
+			budget = (budget*days) + (50*days);
+			
+			// 4 avg productivity * 9 max # devs * # of days
+			totalProgress = 4*9*time;
+			created = true;
+			return created;
+		*/
 	}
 	/**
 	 * Getter for the team
@@ -64,18 +87,18 @@ public class Environment {
 		return budget;
 	}
 	/**
-	 * Getter for days
+	 * Getter for current day
 	 * @return integer
 	 */
 	public int getTime() {
 		return time;
 	}
 	/**
-	 * Getter for total to complete the project
+	 * Getter for days left
 	 * @return integer
 	 */
-	public int getTimeframe() {
-		return timeframe;
+	public int getDeadLine() {
+		return deadline;
 	}
 	/**
 	 * Getter for progress
@@ -98,7 +121,7 @@ public class Environment {
 	 */
 	public boolean hire(NPC person) {
 		
-		return team.add(population.remove(population.indexOf(person)));
+		return team.add(hire.remove(hire.indexOf(person)));
 	}
 	/**
 	 * Fires the NPC
@@ -127,11 +150,10 @@ public class Environment {
 	 */
 	public void checkRecover() {
 		//Checks if anyone has recovered
-		for(NPC person : sick)
+		for(int x = 0; x < sick.size(); x ++)
 		{
-			if(person.getLeave() != true) {
-				team.add(person);
-				sick.remove(person);
+			if(sick.get(x).getLeave() != true) {
+				team.add(sick.remove(x));
 			}
 		}	
 	}
@@ -153,12 +175,14 @@ public class Environment {
 	 * Adds people to the list of candidates to be hired
 	 */
 	public void newHire() {
-		for(int x = 0; x < 3; x++) {
+		while(!hire.isEmpty()) {
 			//People in the front of the list is removed
 			population.add(hire.remove(0));
-			//People are added to the end of the list and they do have a tiny chance of reappearing for hire
-			hire.add(population.remove( ( (int) ( Math.random()*population.size() ) ) ) );
+			//People are added to the end of the list and they do have a tiny chance of reappearing for hire			
 		}	
+		for(int x = 0; x < 3; x ++) {
+			hire.add(population.remove( ( (int) ( Math.random()*population.size() ) ) ) );
+		}
 	}
 	/**
 	 * Triggers an event on the team
@@ -173,7 +197,7 @@ public class Environment {
 	public void update() {
 		//Updates on the progress
 		newHire();
-		progress -= people.getContribution(team) / 100;
+		progress += people.getContribution(team) / 100;
 		//Decreases the budget every two weeks
 		if(time % 14 == 0) {
 			budget -= people.getTotalSalary(team);
@@ -184,27 +208,10 @@ public class Environment {
 		//Removes the ones who is sick from the team
 		checkSick();
 		//Heals everyone
-		people.RecoverHealth(sick);
+		people.recoverHealth(sick);
 		//Moves the healthy back into the team
 		checkRecover();
 		//Increments the day
-		time++;	
-	}
-	
-	public boolean createProject()
-	{
-		boolean created = false;
-		// avg income of developers per year 120k
-		budget = (120000/365) * 9;  // avg divided by days in a year and multiply by max # of devs
-		
-		time = (int)(Math.random()*180)+7;
-		time = 7;   // FOR TESTING PURPOSES ONLY
-		// final budget + extra
-		budget = (budget*days) + (50*days);
-		
-		// 4 avg productivity * 9 max # devs * # of days
-		totalProgress = 4*9*time;
-		created = true;
-		return created;
+		time++;
 	}
 }

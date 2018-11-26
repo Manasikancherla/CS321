@@ -10,3 +10,6 @@
 1-*-* 10 's car broke down on the way here and can't make it in (-)
 1-*-* 10 had a death in the family and will not be coming in (-)
 2-*** 10 There's a sudden power outage and it takes a while to get it back on. Everyone is a little annoyed. (-)
+0**** blank event
+0**** blank event
+0**** blank event

@@ -73,12 +73,13 @@ public class AIEnvironment{
 		 */
 		System.out.println("DAY " + game.getTime());
 	}
-	public void displayRemainingTime(){
+	public void displayTimeframe(){
 		/*
 			Display the time remaining to complete the project
 		*/
 		int daysPast = game.getTime();
-		System.out.println("Days Remaining: " + (timeframe-daysPast) + " days");
+		int totalTime = game.getTimeframe();
+		System.out.println("Days Remaining: " + (totalTime-daysPast) + " days");
 	}
 	public void displayProgress() {
 		/*

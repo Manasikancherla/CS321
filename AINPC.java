@@ -147,11 +147,14 @@ public class AINPC extends NPC{
     public void evaluateEvent(ArrayList<NPC> team, String event) {       
  	switch(event.charAt(0))
         {
-            case '0': return team;
+            case '0': /* No member of the team is affected by the event**/
+			return team;
             
-            case '1':
+            case '1': /* Only one member of the team is affected, and is chosen at random**/
 			int member = (int)(Math.random()*team.size );
-               		switch(event.charAt(1))
+               		
+			/*Second character of the string determines enthusiasm*/
+			switch(event.charAt(1))
 			{
                         	case'-':decreaseEnthusiasm(team.get(member));
 			    		break;
@@ -159,7 +162,8 @@ public class AINPC extends NPC{
                         	case'+':increaseEnthusiasm(team.get(member));
                         		break;	
                		}
- 	
+			
+ 			/*Third character of the string determines level*/
 			switch(event.charAt(2))
 			{
 				case '+':levelUp(team.get(member));
@@ -169,6 +173,7 @@ public class AINPC extends NPC{
 					break;
 			}
               
+			/*Fourth character of the string determines health*/
 			switch(event.charAt(3))
 			{
 				case '+':recoverHealth(team.get(member));
@@ -178,6 +183,7 @@ public class AINPC extends NPC{
 					break;
 			}
 			
+			/*Fifth character of the string determines salary*/
 			switch(event.charAt(4))
 			{
 				case '+':increaseSalary(team.get(member));
@@ -187,18 +193,20 @@ public class AINPC extends NPC{
 					break;
 			}
 			
-            	case '2':
+            	case '2':/**All members of the team are affected**/
                 	for(NPC mem: team)
                 	{
-			 	switch(event.charAt(1))
-			 	{
+				/*Second character of the string determines enthusiasm*/
+				switch(event.charAt(1))
+				{
                         		case'-':decreaseEnthusiasm(team.get(member));
 			    			break;
 			       
                         		case'+':increaseEnthusiasm(team.get(member));
                         			break;	
-               		 	}
- 	
+               			}
+			
+ 				/*Third character of the string determines level*/
 				switch(event.charAt(2))
 				{
 					case '+':levelUp(team.get(member));
@@ -208,6 +216,7 @@ public class AINPC extends NPC{
 						break;
 				}
               
+				/*Fourth character of the string determines health*/
 				switch(event.charAt(3))
 				{
 					case '+':recoverHealth(team.get(member));
@@ -217,7 +226,9 @@ public class AINPC extends NPC{
 						break;
 				}
 			
-				switch(event.charAt(4)){
+				/*Fifth character of the string determines salary*/
+				switch(event.charAt(4))
+				{
 					case '+':increaseSalary(team.get(member));
 						break;
 				

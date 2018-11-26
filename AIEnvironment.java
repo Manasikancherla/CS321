@@ -60,6 +60,14 @@ public class AIEnvironment{
 			Display the current time/day
 			use game.getTime();
 		 */
+		System.out.println("DAY " + game.getTime());
+	}
+	public void displayRemainingTime(){
+		/*
+			Display the time remaining to complete the project
+		*/
+		int daysPast = game.getTime();
+		System.out.println("Days Remaining: " + (timeframe-daysPast) + " days");
 	}
 	public void displayProgress() {
 		/*

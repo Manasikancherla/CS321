@@ -17,6 +17,7 @@ public class AIEnvironment{
 		 */
 		active = true;
 		events = new ArrayList<String>();
+		allNPC = new ArrayList<NPC>();
 		game = new Environment();
 	}
 	public boolean hire(String name) {

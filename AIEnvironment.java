@@ -12,17 +12,6 @@ public class AIEnvironment{
 	 * @throws FileNotFoundException 
 	 */
 	public AIEnvironment() throws FileNotFoundException {
-		/*
-	 	Scanner to fill in events
-		 */
-		active = true;
-		events = new ArrayList<String>();
-		game = new Environment();
-		allNPC = game.getPopulation();
-	}
-	
-	public void createEvent() throws FileNotFoundException
-	{
 		Scanner in = new Scanner(new File("events.txt"));
 		String eventString;
 		while(in.hasNext())
@@ -31,7 +20,20 @@ public class AIEnvironment{
 			events.add(eventString);
 		}
 		in.close();
+		active = true;
+		events = new ArrayList<String>();
+		game = new Environment();
+		allNPC = game.getPopulation();
+		//Eric
+		game.hire(allNPC.get(0));
+		//Manasi
+		game.hire(allNPC.get(1));
+		//Adam
+		game.hire(allNPC.get(2));
+		//Renzo
+		game.hire(allNPC.get(3));
 	}
+	
 	public boolean hire(String name) {
 		NPC person = null;
 		/*

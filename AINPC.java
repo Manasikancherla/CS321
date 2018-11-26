@@ -26,6 +26,7 @@ public class AINPC extends NPC{
     		NPC human = new NPC();
         int level = (int) (Math.random() * 5 + 2);
         human.setName(name);
+        human.setEnthusiasm((int)(Math.random() * 3 + 3));
         human.setLevel(level);
         human.setHealth(100);
         human.setLeave(false);
@@ -66,7 +67,7 @@ public class AINPC extends NPC{
      * @param human NPC object
      */
     public void increaseEnthusiasm(NPC human) {
-    		human.setEnthusiasm(human.getEnthusiasm() == 6 ? human.getEnthusiasm() : human.getEnthusiasm() - 1);
+    		human.setEnthusiasm(human.getEnthusiasm() == 6 ? human.getEnthusiasm() : human.getEnthusiasm() + 1);
     }
     /**
      * Decreases the enthusiasm of the selected NPC
@@ -198,28 +199,24 @@ public class AINPC extends NPC{
                 	for(NPC mem: team){
                 		switch(event.charAt(1))
                 		{
-                        		case'-':decreaseEnthusiasm(mem);
-			    			break;
-                        		case'+':increaseEnthusiasm(mem);
-                        			break;	
-               			}
-                		switch(event.charAt(2))
-				{
+                        	case'-':decreaseEnthusiasm(mem);
+			    				break;
+                        	case'+':increaseEnthusiasm(mem);
+                        		break;	
+               		}
+                		switch(event.charAt(2)){
                 			case '+':levelUp(mem);
                 				break;
-						
                 			case '-':levelDown(mem);
                 				break;
                 		}
-                		switch(event.charAt(3))
-				{
+                		switch(event.charAt(3)){
                 			case '+':recoverHealth(mem);
                 				break;
                 			case '-':decayHealth(mem);
                 				break;
                 		}
-                		switch(event.charAt(4))
-				{
+                		switch(event.charAt(4)){
                 			case '+':increaseSalary(mem);
                 				break;			
                 			case '-':decreaseSalary(mem);

@@ -3,8 +3,9 @@ import java.io.FileNotFoundException;
 import java.util.*;
 public class AINPC extends NPC{
     ArrayList<NPC> npc = new ArrayList<NPC>();
+    
     /**
-     * Constructor for NPCAI
+     * Constructor for AINPC
      * This generates a set amount of randomized NPCs
      * The STATS of each NPC will be randomized along with a list of random names
      * @throws FileNotFoundException
@@ -23,12 +24,12 @@ public class AINPC extends NPC{
      */
     private NPC createNPC(String name){
     		NPC human = new NPC();
-        int level = (int) (Math.random() * 5 +3);
+        int level = (int) (Math.random() * 5 + 2);
         human.setName(name);
         human.setLevel(level);
         human.setHealth(100);
         human.setLeave(false);
-        human.setSalary((20000 * level ) / 12.0);
+        human.setSalary((20000 * level ));
         return human;
     }
     /**
@@ -43,14 +44,16 @@ public class AINPC extends NPC{
      * @param human takes in a human NPC and calculates a number with its current STATs
      * @return returns a double, the magic number
      */
-    private double getMagic(NPC human){
-        
+    private double getMagic(NPC human){      
         return ( ( (100) * ( (35 + human.getLevel() ) + (5 * human.getEnthusiasm() ) ) ) /
                     ( human.getHealth() - ( human.getLeave() ? 4.0 : 0.0 ) ) );
-    }
-    
-    public double getContribution(ArrayList<NPC> team)
-    {
+    }  
+    /**
+     * Gets the total contribution of the team
+     * @param team
+     * @return double value of total contribution
+     */
+    public double getContribution(ArrayList<NPC> team){
         double contribution = 0.0;
         for(NPC member : team)
         {
@@ -63,7 +66,7 @@ public class AINPC extends NPC{
      * @param human NPC object
      */
     public void increaseEnthusiasm(NPC human) {
-    		human.setEnthusiasm(human.getEnthusiasm() ==6 ? human.getEnthusiasm() : human.getEnthusiasm() - 1);
+    		human.setEnthusiasm(human.getEnthusiasm() == 6 ? human.getEnthusiasm() : human.getEnthusiasm() - 1);
     }
     /**
      * Decreases the enthusiasm of the selected NPC
@@ -79,10 +82,21 @@ public class AINPC extends NPC{
      */
     public void decayHealth(ArrayList<NPC> team) {
     		for(NPC human: team) {
-    			human.setHealth(human.getHealth() - 1);
-    				human.setLeave(human.getHealth() <= 55 ? true : false);	
+    			human.setHealth(human.getHealth() - ((int)(Math.random()*2 + 1)));
+    				human.setLeave(human.getHealth() <= 40 ? true : false);	
     		}
     }
+    /**
+     * Increases the health of everyone on the team
+     * If a NPC is above a certain health the leave flag will trigger
+     * @param team takes in the development team
+     */
+    public void RecoverHealth(ArrayList<NPC> team) {
+		for(NPC human: team) {
+			human.setHealth(human.getHealth() - ((int)(Math.random()*3 + 8)));
+				human.setLeave(human.getHealth() >= 80 ? false : true);	
+		}
+}
     /**
      * Levels up the selected NPC
      * @param human NPC object
@@ -109,8 +123,21 @@ public class AINPC extends NPC{
      * @param human NPC object
      */
     public void decreaseSalary(NPC human){
-    		human.setSalary(human.getSalary() + ( (int) ( (Math.random() * 9 + 1) * 1000 ) ) );
+    		human.setSalary(human.getSalary() - ( (int) ( (Math.random() * 9 + 1) * 1000 ) ) );
     }
+    /**
+     * Gets the total Salary 
+     * @param team
+     * @return double salary
+     */
+    public double getTotalSalary(ArrayList<NPC> team) {
+    		double salary = 0;
+    	        for(NPC member : team)
+    	        {
+    	            salary += (member.getSalary() / 26);
+    	        }
+    	    return salary;
+    	}
     /**
      * Evaluates an event and changes the STATs of the team members
      * @param team Takes in the development team
@@ -118,7 +145,8 @@ public class AINPC extends NPC{
      * @return
      */
     public void evaluateEvent(ArrayList<NPC> team, String event) {
-        switch(event.charAt(0))
+        /*
+    		switch(event.charAt(0))
         {
             case '0': return team;
             
@@ -139,7 +167,7 @@ public class AINPC extends NPC{
                 {
                 }
         }
-    	/*int member = (int)Math.random()*team.size();
+    		int member = (int)Math.random()*team.size();
         NPC dummy = (NPC)team.get(member).clone();
         
         if(event.charAt(1) == '+'&&team.get(member))
@@ -156,7 +184,8 @@ public class AINPC extends NPC{
                 printf(dummy.getName()+" is in critical condition. Needs to be fired immediately.\n");
         }
             
-        team.get(member) = (NPC)dummy.clone();*/
+        team.get(member) = (NPC)dummy.clone();
         return team;
+        */
     }
 }

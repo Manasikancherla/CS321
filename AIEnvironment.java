@@ -206,7 +206,7 @@ public class AIEnvironment{
 		{
 			if(s.charAt(0) == '1')
 			{
-				System.out.println(game.team.get(temp2).name+""+message);
+				System.out.println(game.team.get(temp).name+""+message);
 				game.triggerEvent(s);
 			}
 			else

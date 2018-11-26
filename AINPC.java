@@ -76,6 +76,13 @@ public class AINPC extends NPC{
     		human.setEnthusiasm(human.getEnthusiasm() - 1);
     }
     /**
+     * Single NPC decreases health
+     * @param person
+     */
+    public void decayHealth(NPC person) {
+		person.setHealth(person.getHealth() < 10 ? 0 : person.getHealth() - ((int) (Math.random() * 9 + 1) ) );
+    }
+    /**
      * Decreases the health of everyone on the team
      * If a NPC is below a certain health the leave flag will trigger
      * @param team takes in the development team
@@ -87,6 +94,13 @@ public class AINPC extends NPC{
     		}
     }
     /**
+     * Single NPC recovers health
+     * @param person
+     */
+    public void recoverHealth(NPC person) {
+		person.setHealth(person.getHealth() > 90 ? 100 : person.getHealth() + ((int) (Math.random() * 9 + 1) ) );
+    }
+    /**
      * Increases the health of everyone on the team
      * If a NPC is above a certain health the leave flag will trigger
      * @param team takes in the development team
@@ -96,7 +110,7 @@ public class AINPC extends NPC{
 			human.setHealth(human.getHealth() - ((int)(Math.random()*3 + 8)));
 				human.setLeave(human.getHealth() >= 80 ? false : true);	
 		}
-}
+    }
     /**
      * Levels up the selected NPC
      * @param human NPC object
@@ -145,97 +159,70 @@ public class AINPC extends NPC{
      * @return
      */
     public void evaluateEvent(ArrayList<NPC> team, String event) {       
- 	switch(event.charAt(0))
-        {
-            case '0': /* No member of the team is affected by the event**/
-			return team;
-            
-            case '1': /* Only one member of the team is affected, and is chosen at random**/
-			int member = (int)(Math.random()*team.size );
-               		
-			/*Second character of the string determines enthusiasm*/
-			switch(event.charAt(1))
-			{
-                        	case'-':decreaseEnthusiasm(team.get(member));
-			    		break;
-			       
-                        	case'+':increaseEnthusiasm(team.get(member));
+    		switch(event.charAt(0)){
+            case '0': 
+            		break;
+            case '1':
+            		int member = (int)( Math.random()*team.size() );
+               	switch(event.charAt(1))
+               	{
+               		case'-':decreaseEnthusiasm(team.get(member));
+			    			break;
+               		case'+':increaseEnthusiasm(team.get(member));
+                        	break;	
+               	}
+               	switch(event.charAt(2))
+               	{
+               		case '+':levelUp(team.get(member));
+               			break;
+               		case '-':levelDown(team.get(member));
+               			break;
+               	}
+              
+               	switch(event.charAt(3))
+               	{
+               		case '+':recoverHealth(team.get(member));
+               			break;
+               		case '-':decayHealth(team.get(member));
+               			break;
+               	}
+               	switch(event.charAt(4))
+               	{
+               		case '+':increaseSalary(team.get(member));
+               			break;			
+               		case '-':decreaseSalary(team.get(member));
+               			break;
+               	}
+               	break;
+            	case '2':
+                	for(NPC mem: team){
+                		switch(event.charAt(1))
+                		{
+                        	case'-':decreaseEnthusiasm(mem);
+			    				break;
+                        	case'+':increaseEnthusiasm(mem);
                         		break;	
                		}
-			
- 			/*Third character of the string determines level*/
-			switch(event.charAt(2))
-			{
-				case '+':levelUp(team.get(member));
-					break;
-				
-				case '-':levelDown(team.get(member));
-					break;
-			}
-              
-			/*Fourth character of the string determines health*/
-			switch(event.charAt(3))
-			{
-				case '+':recoverHealth(team.get(member));
-					break;
-				
-				case '-':decayHealth(team.get(member));
-					break;
-			}
-			
-			/*Fifth character of the string determines salary*/
-			switch(event.charAt(4))
-			{
-				case '+':increaseSalary(team.get(member));
-					break;
-				
-				case '-':decreaseSalary(team.get(member));
-					break;
-			}
-			
-            	case '2':/**All members of the team are affected**/
-                	for(NPC mem: team)
-                	{
-				/*Second character of the string determines enthusiasm*/
-				switch(event.charAt(1))
-				{
-                        		case'-':decreaseEnthusiasm(team.get(member));
-			    			break;
-			       
-                        		case'+':increaseEnthusiasm(team.get(member));
-                        			break;	
-               			}
-			
- 				/*Third character of the string determines level*/
-				switch(event.charAt(2))
-				{
-					case '+':levelUp(team.get(member));
-						break;
-				
-					case '-':levelDown(team.get(member));
-						break;
-				}
-              
-				/*Fourth character of the string determines health*/
-				switch(event.charAt(3))
-				{
-					case '+':recoverHealth(team.get(member));
-						break;
-				
-					case '-':decayHealth(team.get(member));
-						break;
-				}
-			
-				/*Fifth character of the string determines salary*/
-				switch(event.charAt(4))
-				{
-					case '+':increaseSalary(team.get(member));
-						break;
-				
-					case '-':decreaseSalary(team.get(member));
-						break;
-				}
+                		switch(event.charAt(2)){
+                			case '+':levelUp(mem);
+                				break;
+                			case '-':levelDown(mem);
+                				break;
+                		}
+                		switch(event.charAt(3)){
+                			case '+':recoverHealth(mem);
+                				break;
+                			case '-':decayHealth(mem);
+                				break;
+                		}
+                		switch(event.charAt(4)){
+                			case '+':increaseSalary(mem);
+                				break;			
+                			case '-':decreaseSalary(mem);
+                				break;
+                		}
                 	}
+                	break;
         	}
     	}
 }

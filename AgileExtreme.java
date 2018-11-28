@@ -15,7 +15,8 @@ public class AgileExtreme {
     			input = scanner.next();
     			switch(input) {
     				case "quit":
-    					break;
+						System.out.println("\nThanks for playing!");
+    					return;
     								
     				case "hire":		
     					while(true) {
@@ -126,11 +127,10 @@ public class AgileExtreme {
     					}
     					break;
     				case "budget":	
-    					System.out.println("\nYour current buget is a small loan of a million");
+    					System.out.println("\nYour initial budget is a small loan of a million");
     					game.displayBudget();
     					break;
-    				case "progress":
-    					System.out.println("\nThe current progress is zero!");
+					case "progress":
     					game.displayProgress();
     					break;
     				case "next":	
@@ -162,7 +162,7 @@ public class AgileExtreme {
     			}
     		}
     		scanner.close();
-    		System.out.println("\nThanks for playing!");
+
     		System.exit(0);
     }
     private static void startMessage() {
@@ -170,12 +170,12 @@ public class AgileExtreme {
     		System.out.println("This is a simple game where you manage a development team.");
     		System.out.println("You direct your team through a series of commands to finish a project.");
     		System.out.println("Your goal is to finish in the least amount of days possible.");
-    		System.out.println("Good luck!\n\n\n\n\n");
+    		System.out.println("Good luck!\n\n\n\n");
     }
     private static void displayOptions() {
     		System.out.println("\nHere is a list of all the possible commands.");
     		System.out.println("help: Displays all the possible commands");
-    		System.out.println("buget: Displays the current buget");
+    		System.out.println("budget: Displays the current budget");
     		System.out.println("progress: Displays the current progress");
     		System.out.println("next: Proceeds to the next day");
     		System.out.println("hire: Hire more members to the development team");

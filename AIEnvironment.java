@@ -35,6 +35,7 @@ public class AIEnvironment{
 		}		
 		return false;
 	}
+
 	public boolean fire(String name) {
 		NPC person = null;
 		/*
@@ -81,7 +82,7 @@ public class AIEnvironment{
 		for (NPC npc : game.getTeam()){
 			npc.displayStats();
 		}
-		System.out.println("\nThese members are on break at the momement");
+
 		for (NPC npc : game.getSick()){
 			npc.displayStats();
 		}
@@ -223,5 +224,6 @@ public class AIEnvironment{
 		
 		//This updates time, list of hire, everyone that is on the team and sick, budget, and progress
 		game.update();	
-	}	
+	}
+
 }

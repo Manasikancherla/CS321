@@ -37,20 +37,21 @@ public class AINPCTest extends AINPC {
             assertEquals("Name must be the one given", testEmployee.getName(), "test");
             assertTrue("Enthusiasm must be between 1 to 6",0<=testEmployee.getEnthusiasm()&&testEmployee.getEnthusiasm()<=6 );
             assertTrue("Health must be between 30 to 100",30<=testEmployee.getHealth()&&testEmployee.getHealth()<=100);
-            assertTrue("Level must be between 3 to 6",3<=testEmployee.getLevel()&&testEmployee.getLevel()<=6);
+            assertTrue("Level must be between 1 to 6",1<=testEmployee.getLevel()&&testEmployee.getLevel()<=6);
             assertTrue("Salary must be between 20000.00 to 120000.00",20000.00<=testEmployee.getSalary() || testEmployee.getSalary()<=120000.00);
             assertTrue("Initially all employees must not be on leave",!testEmployee.getLeave());
         }
     }
 
     @Test
-    public static void getNPCTest(ArrayList<NPC> npcList) {
+    public void getNPCTest() {
+        ArrayList<NPC> npcList = Tester.getNPC();
         for(NPC testEmployee : npcList)
         {
             assertEquals("Name must be the one given", testEmployee.getName(), testEmployee.name);
             assertTrue("Enthusiasm must be between 1 to 6",0<=testEmployee.getEnthusiasm()&&testEmployee.getEnthusiasm()<=6 );
             assertTrue("Health must be between 30 to 100",30<=testEmployee.getHealth()&&testEmployee.getHealth()<=100);
-            assertTrue("Level must be between 3 to 6",3<=testEmployee.getLevel()&&testEmployee.getLevel()<=6);
+            assertTrue("Level must be between 1 to 6",1<=testEmployee.getLevel()&&testEmployee.getLevel()<=6);
             assertTrue("Salary must be between 20000.00 to 120000.00",20000.00<=testEmployee.getSalary() || testEmployee.getSalary()<=120000.00);
             assertTrue("Initially all employees must not be on leave",!testEmployee.getLeave());
 
@@ -59,68 +60,105 @@ public class AINPCTest extends AINPC {
     }
 
     @Test
-    public static void getMagicTest(ArrayList<NPC> npcList)
+    public void getMagicTest()
     {
-        for(NPC testEmployee : npcList)
-            assertTrue("Magic number must be between 35 and 72",Tester.getMagic(testEmployee)>=35 && Tester.getMagic(testEmployee)<=72);
+        ArrayList<NPC> npcList = Tester.getNPC();
+        for (NPC testEmployee : npcList)
+            assertTrue("Magic number must be between 3500 and 7200", Tester.getMagic(testEmployee) >= 3500 && Tester.getMagic(testEmployee) <= 7200);
     }
 
     @Test
-    public static void getContributionTest(ArrayList<NPC> npcList) 
+    public void getContributionTest()
     {
+        ArrayList<NPC> npcList = Tester.getNPC();
         assertTrue("Contribution of team must be between 1750 to 3550",Tester.getContribution(npcList)>=1750 && Tester.getContribution(npcList)<=3650);
     }
 
     @Test
-    public void increaseEnthusiasmTest() {
-        
-    }
-
-    @Test
-    public void decreaseEnthusiasmTest() {
-    }
-
-    @Test
-    public void decayHealthTest() {
-    }
-
-    @Test
-    public void decayHealth1Test() {
-    }
-
-    @Test
-    public void recoverHealthTest() {
-    }
-
-    @Test
-    public void recoverHealth1Test() {
-    }
-
-    @Test
-    public void levelUpTest() {
-    }
-
-    @Test
-    public void levelDownTest() {
-    }
-
-    @Test
-    public void increaseSalaryTest() {
-    }
-
-    @Test
-    public void decreaseSalaryTest() {
-    }
-
-    @Test
-    public void getTotalSalaryTest() {
-    }
-    
-    public static void main(String args[])
+    public void increaseEnthusiasmTest()
     {
-        getNPCTest(Tester.getNPC());
-        getMagicTest(Tester.getNPC());
-        getContributionTest(Tester.getNPC());
+        int test;
+        ArrayList<NPC> npcList = Tester.getNPC();
+        for (NPC testEmployee : npcList)
+        {
+            test = testEmployee.getEnthusiasm();
+            Tester.increaseEnthusiasm(testEmployee);
+            assertTrue("Enthusiasm must increase", testEmployee.getEnthusiasm() == test + 1 && testEmployee.getEnthusiasm()<=6);
+        }
 
     }
+
+    @Test
+    public void decreaseEnthusiasmTest()
+    {
+        int test;
+        ArrayList<NPC> npcList = Tester.getNPC();
+        for (NPC testEmployee : npcList)
+        {
+            test = testEmployee.getEnthusiasm();
+            Tester.decreaseEnthusiasm(testEmployee);
+            assertTrue("Enthusiasm must decrease", testEmployee.getEnthusiasm() == test - 1 && testEmployee.getEnthusiasm()<=6);
+        }
+    }
+
+    @Test
+    public void levelUpTest()
+    {
+        int test;
+        ArrayList<NPC> npcList = Tester.getNPC();
+        for (NPC testEmployee : npcList)
+        {
+            test = testEmployee.getLevel();
+            Tester.levelUp(testEmployee);
+            assertTrue("Level must increase", testEmployee.getLevel() == test + 1 && testEmployee.getLevel()<=6);
+        }
+    }
+
+    @Test
+    public void levelDownTest()
+    {
+        int test;
+        ArrayList<NPC> npcList = Tester.getNPC();
+        for (NPC testEmployee : npcList)
+        {
+            test = testEmployee.getLevel();
+            Tester.levelDown(testEmployee);
+            assertTrue("Level must decrease", testEmployee.getLevel() == test - 1 && testEmployee.getLevel()<=6);
+        }
+    }
+
+    @Test
+    public void increaseSalaryTest()
+    {
+        double test;
+        ArrayList<NPC> npcList = Tester.getNPC();
+        for (NPC testEmployee : npcList)
+        {
+            test = testEmployee.getSalary();
+            Tester.increaseSalary(testEmployee);
+            assertTrue("Salary must increase", testEmployee.getSalary() >= test);
+        }
+    }
+
+    @Test
+    public void decreaseSalaryTest()
+    {
+        double test;
+        ArrayList<NPC> npcList = Tester.getNPC();
+        for (NPC testEmployee : npcList)
+        {
+            test = testEmployee.getSalary();
+            Tester.decreaseSalary(testEmployee);
+            assertTrue("Salary must decrease", testEmployee.getSalary() <= test && testEmployee.getSalary()>=1000);
+        }
+    }
+
+    @Test
+    public void getTotalSalaryTest()
+    {
+        ArrayList<NPC> npcList = Tester.getNPC();
+        assertTrue("Total sum of salaries must exceed 1000",Tester.getTotalSalary(npcList)>=1000);
+
+    }
+
 }

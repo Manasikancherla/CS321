@@ -224,5 +224,7 @@ public class AIEnvironment{
 		//This updates time, list of hire, everyone that is on the team and sick, budget, and progress
 		game.update();	
 	}
-
+		public ArrayList<String> getEvents() {
+		return events;
+	}
 }

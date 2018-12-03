@@ -62,16 +62,18 @@ public class AINPCTest extends AINPC {
     public static void getMagicTest(ArrayList<NPC> npcList)
     {
         for(NPC testEmployee : npcList)
-            assertTrue("Magic number must be between 35 and 72",Tester.getMagic(testEmployee)>=35 || Tester.getMagic(testEmployee)<=72);
+            assertTrue("Magic number must be between 35 and 72",Tester.getMagic(testEmployee)>=35 && Tester.getMagic(testEmployee)<=72);
     }
 
     @Test
-    public void getContributionTest() {
-
+    public static void getContributionTest(ArrayList<NPC> npcList) 
+    {
+        assertTrue("Contribution of team must be between 1750 to 3550",Tester.getContribution(npcList)>=1750 && Tester.getContribution(npcList)<=3650);
     }
 
     @Test
     public void increaseEnthusiasmTest() {
+        
     }
 
     @Test
@@ -113,15 +115,12 @@ public class AINPCTest extends AINPC {
     @Test
     public void getTotalSalaryTest() {
     }
-
-    @Test
-    public void evaluateEventTest() {
-    }
-
+    
     public static void main(String args[])
     {
         getNPCTest(Tester.getNPC());
         getMagicTest(Tester.getNPC());
+        getContributionTest(Tester.getNPC());
 
     }
 }

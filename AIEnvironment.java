@@ -19,7 +19,6 @@ public class AIEnvironment{
 		Scanner in = new Scanner(new File("events.txt"));
 		while(in.hasNextLine())
 		{
-			in.nextLine();
 			events.add(in.nextLine());
 		}
 		in.close();

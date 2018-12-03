@@ -1,8 +1,23 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.*;
 public class AgileExtreme {
 
     public static void main(String[] args) throws FileNotFoundException{
+    		Logger logger = java.util.logging.Logger.getLogger("Logs");
+    		FileHandler file;
+    		try {
+				file = new FileHandler("Logs.log");
+				logger.addHandler(file);
+    				SimpleFormatter format = new SimpleFormatter();
+    				file.setFormatter(format);
+    				logger.info("Start of log");
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
     		AIEnvironment game = new AIEnvironment();
     		Scanner scanner = new Scanner(System.in);
     		String input;
@@ -13,6 +28,7 @@ public class AgileExtreme {
     		while(game.running()) {
     			System.out.println("\nWhat would you like to do today?");
     			input = scanner.next();
+    			logger.info("User input: " + input);
     			switch(input) {
     				case "quit":
 						System.out.println("\nThanks for playing!");
@@ -25,12 +41,18 @@ public class AgileExtreme {
     						System.out.println("Which npc would you like to hire? (Name of NPC)");
     						command = scanner.next();
     						if(game.hire(command)) {
+    							logger.info("Hire: " + command);
+    							logger.info("Successfully hired");
     							System.out.println("\nCongratulations you have hired" + command);
     							break;
     						}else if(command.equals("quit")){
+    							logger.info("Hire: " + command);
+    							logger.info("Successfully quit hire");
     							command = "";
     							break;
     						}else{
+    							logger.info("Hire: " + command);
+    							logger.info("Failed to hire");
     							System.out.println("\nThe person you tried to hire does not exist.");
     						}
     					}
@@ -44,12 +66,18 @@ public class AgileExtreme {
     						System.out.println("Which npc would you like to fire? (Name of NPC)");
     						command = scanner.next();
     						if(game.fire(command)) {
+    							logger.info("Fire: " + command);
+    							logger.info("Successfully fired");
     							System.out.println(command + "\nHas been removed from the team.");
     							break;
     						}else if(command.equals("quit")){
+    							logger.info("Fire: " + command);
+    							logger.info("Successfully quit fire");
     							command = "";
     							break;
     						}else{
+    							logger.info("Fire: " + command);
+    							logger.info("Failed to fire");
     							System.out.println("\nThe person you tried to fire is not on the team.");
     						}
     					}
@@ -58,6 +86,7 @@ public class AgileExtreme {
     				case "stats":	
     					System.out.println("\nHere are the stats of the members of the development team!");
     					game.displayStats();
+    					logger.info("Stats were displayed");
     					break;
     				case "rest":			
     					while(true) {
@@ -65,12 +94,18 @@ public class AgileExtreme {
     						game.displayTeam();
     						command = scanner.next();
 						if(game.rest(command)) {
+							logger.info("Rest: " + command);
+							logger.info("Successfully rest");
 							System.out.println("\n" + command + " will be off for the next few days.");
 							break;
 						}else if(command.equals("quit")){
+							logger.info("Rest: " + command);
+							logger.info("Successfully quit rest");
 							command = "";
 							break;
 						}else{
+							logger.info("Rest: " + command);
+							logger.info("Failed to rest");
 							System.out.println("\nThat NPC does not exist");
 						}
 					}
@@ -84,6 +119,7 @@ public class AgileExtreme {
     					while(true) {
     						System.out.println("\nWould you like to spend some money to motivate the team?");
     						command = scanner.next();
+    						logger.info("Boost Confirmation: " + command);
     						if(command.equals("yes")) {
     							System.out.println("\nHere are a few options that may motivate the team!");
     							game.showBoost();
@@ -91,37 +127,47 @@ public class AgileExtreme {
     							switch(scanner.nextInt()) {
     								case 1:  									
     									if(game.useBoost(1)){
+    										logger.info("Boost: 1 successful");
     										boost = true;
     									}else{
+    										logger.info("Boost: 1 - not enough money");
     										System.out.println("You do not have enough money to do this.");
     									}
     									boost = true;
     									break;
     								case 2:
     									if(game.useBoost(2)){
+    										logger.info("Boost: 2 successful");
     										boost = true;
     									}else{
+    										logger.info("Boost: 2 not enough money");
     										System.out.println("You do not have enough money to do this.");
     									}
     									boost = true;
     									break;
     								case 3:
     									if(game.useBoost(3)){
+    										logger.info("Boost: 3 successful");
     										boost = true;
     									}else{
+    										logger.info("Boost: 3 not enough money");
     										System.out.println("You do not have enough money to do this.");
     									}
-    									boost = true;
     									break;
     								default:
     									System.out.println("\nThat is not a possible option");
+    									logger.info("Boost: Invalid user input");
     									continue;
     							}
     							break;
     						}else if(command.equals("quit") || command.equals("no")){
+    							logger.info("boost: " + command);
+    							logger.info("Successfully quit boost");
     							command = "";
     							break;
     						}else{
+    							logger.info("Rest: " + command);
+    							logger.info("Failed to boost");
     							System.out.println("\nThat NPC does not exist");
     						}
     					}
@@ -129,26 +175,32 @@ public class AgileExtreme {
     				case "budget":	
     					System.out.println("\nYour initial budget is a small loan of a million");
     					game.displayBudget();
+    					logger.info("Budget was displayed");
     					break;
-					case "progress":
+				case "progress":
     					game.displayProgress();
+    					logger.info("Progress was displayed");
     					break;
     				case "next":	
     					if( (game.getTime() % 7 == 3 ) && boost) {
     						System.out.println("\nYou can get another boost this week!");
     						boost = false;
+    						logger.info("SYSTEM: boost is available again");
     					}
     					game.update();
+    					logger.info("Proceeding to the next day");
     					break;
     				case"skip":
     					if(boost) {
     						System.out.println("\nBoost is available again!");
     						boost = false;
+    						logger.info("SYSTEM: boost is available again");
     					}
     					System.out.println("\nProceeding to the next day!");
     					for(int x = 0; x < 7; x ++){
     						game.update();
     					}
+    					logger.info("Proceeding to the next week");
     					break;
     				case "help":
     					displayOptions();

@@ -11,9 +11,9 @@ public class AINPC extends NPC{
      * @throws FileNotFoundException
      */
     public AINPC() throws FileNotFoundException{
-    		Scanner scanner = new Scanner(new File("names.txt"));
+    	Scanner scanner = new Scanner(new File("names.txt"));
         while(scanner.hasNext()){
-        npc.add( createNPC(scanner.next() ) );
+        npc.add(createNPC(scanner.next()));
         }
         scanner.close();
     }
@@ -22,11 +22,11 @@ public class AINPC extends NPC{
      * @param name the name that will be given to the NPC
      * @return returns a generated NPC object
      */
-    private NPC createNPC(String name){
-    		NPC human = new NPC();
-        int level = (int) (Math.random() * 5 + 2);
+    protected NPC createNPC(String name){
+    	NPC human = new NPC();
+        int level = (int) (Math.random()*5 + 1);
         human.setName(name);
-        human.setEnthusiasm((int)(Math.random() * 3 + 3));
+        human.setEnthusiasm((int)(Math.random()*3 + 3));
         human.setLevel(level);
         human.setHealth(100);
         human.setLeave(false);
@@ -45,9 +45,9 @@ public class AINPC extends NPC{
      * @param human takes in a human NPC and calculates a number with its current STATs
      * @return returns a double, the magic number
      */
-    private double getMagic(NPC human){      
-        return ( ( (100) * ( (35 + human.getLevel() ) + (5 * human.getEnthusiasm() ) ) ) /
-                    ( human.getHealth() - ( human.getLeave() ? 4.0 : 0.0 ) ) );
+    protected double getMagic(NPC human){
+        return ( ( (100) * ( 35 + (human.getLevel()  + (5 * human.getEnthusiasm() ) )/
+                    ( (101 - human.getHealth()) - ( human.getLeave() ? 4.0 : 0.0 ) ) )));
     }  
     /**
      * Gets the total contribution of the team
@@ -58,7 +58,7 @@ public class AINPC extends NPC{
         double contribution = 0.0;
         for(NPC member : team)
         {
-            contribution += getMagic(member);
+            contribution += getMagic(member)/100;
         }
         return contribution;
     }
@@ -66,15 +66,18 @@ public class AINPC extends NPC{
      * Increases the enthusiasm of the selected NPC
      * @param human NPC object
      */
-    public void increaseEnthusiasm(NPC human) {
+    public void increaseEnthusiasm(NPC human)
+	{
     		human.setEnthusiasm(human.getEnthusiasm() == 6 ? human.getEnthusiasm() : human.getEnthusiasm() + 1);
     }
     /**
      * Decreases the enthusiasm of the selected NPC
      * @param human NPC object
      */
-    public void decreaseEnthusiasm(NPC human) {
-    		human.setEnthusiasm(human.getEnthusiasm() - 1);
+    public void decreaseEnthusiasm(NPC human)
+	{
+
+    	human.setEnthusiasm(human.getEnthusiasm() == 0? human.getEnthusiasm() : human.getEnthusiasm() - 1);
     }
     /**
      * Single NPC decreases health
@@ -131,14 +134,14 @@ public class AINPC extends NPC{
      * @param human NPC object
      */
     public void increaseSalary(NPC human){
-        human.setSalary(human.getSalary() + ( (int) ( (Math.random() * 9 + 1) * 1000 ) ) );
+        human.setSalary(human.getSalary()  + ( (int) ( (Math.random() * 9 + 1) * 1000 ) ) );
     }
     /**
      * decreases the salary of the selected NPC
      * @param human NPC object
      */
     public void decreaseSalary(NPC human){
-    		human.setSalary(human.getSalary() - ( (int) ( (Math.random() * 9 + 1) * 1000 ) ) );
+    		human.setSalary(human.getSalary() == 1000 ? human.getSalary() : human.getSalary() - ( (int) ( (Math.random() * 9 + 1) * 1000 ) ) );
     }
     /**
      * Gets the total Salary 

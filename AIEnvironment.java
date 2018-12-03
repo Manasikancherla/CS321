@@ -69,7 +69,7 @@ public class AIEnvironment{
 		/*
 		  	print out the budget;
 		 */
-		System.out.println("Budget: " + game.getBudget());
+		System.out.printf("Budget: $%.2f" , game.getBudget());
 	}
 	public void displayStats() {
 		/*

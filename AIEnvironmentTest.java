@@ -43,4 +43,32 @@ public class AIEnvironmentTest {
 		int days = tester.game.getTimeframe()- tester.game.getTime();
 		assertTrue("Days must be within 1~31", 1<=days && days <=31);
 	}
+	
+		}
+	@Test
+	public void restTest()
+	{
+		Environment testE = tester.game;
+		assertTrue("Must be true",testE.giveBreak(testE.getTeam().get(0)));
+		assertEquals("Name have to be equal to Eric",testE.getSick().get(0).getName(),"Eric");
+	}
+	
+	@Test
+	public void hireTest()
+	{
+		Environment testE = tester.game;
+		NPC testNPC = null;
+		testNPC.setName("TEST");
+		assertTrue("Must be true ",testE.hire(testNPC));
+		assertEquals("Name has to be TEST ",testE.getTeam().get(4).getName(),"TEST");
+	}
+	
+	@Test
+	public void fireTest()
+	{
+		Environment testE = tester.game;
+		assertTrue("Must be true ",testE.fire(testE.getTeam().get(0)));
+		assertEquals("Name has to be Manasi ",testE.getTeam().get(0).getName(),"Manasi");
+	}
+	
 }

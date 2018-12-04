@@ -133,7 +133,7 @@ public class AIEnvironment{
 		 */
 		System.out.println("1: Throw a party for the whole team ($1k).");
 		System.out.println("2: Promote someone in the team ($15k).");
-		System.out.println("3: The whole team is getting help care($25k).");
+		System.out.println("3: The whole team is getting health care($25k).");
 	
 	}
 	public boolean useBoost(int selection) {

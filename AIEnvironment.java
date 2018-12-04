@@ -106,7 +106,8 @@ public class AIEnvironment{
 	 		print out the progress
 	 		use game.getProgress();
 		 */
-		System.out.println("Total Progress: " + game.getProgress()/game.getTotalProgress() * 100 + "%");
+		System.out.printf("/nTotal Progress: %.2f" , (game.getProgress()/game.getTotalProgress() * 100 ));
+		System.out.print("%");
 	}
 	public void displayHire() {
 		/*

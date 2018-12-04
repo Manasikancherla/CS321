@@ -1,129 +1,139 @@
-import java.junit.*;
+import java.util.*;
+import org.junit.Test;
 import static org.junit.Assert.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class EnvironmentTest {
+  
+  private Environment test;
 
+  public EnvironmentTest() throws FileNotFoundException {
+    test = new Environment();
+  }
+  
  @Test
  public void environmentConstructorTest() {
-  Environment test = new Environment();
-  ArrayList<NPC> teamTest = game.getTeam();
-  ArrayList<NPC> sickTest = game.getSick();
-  ArrayList<NPC> hireTest = game.getHire();
-  ArrayList<NPC> populationTest = game.getPopulation();
-  double budgetTest = game.getBudget();
-  double progressTest = game.getProgress();
-  double totalProgressTest = game.getTotalProgress();
-  int timeTest = game.getTime();
-  int deadlineTest = game.getDeadLine();
-  assertEquals(teamTest, team);
-  assertEquals(sickTest, sick);
-  assertEquals(hireTest, hire);
-  assertEquals(populationTest, population);
-  assertEquals(budgetTest, budget);
-  assertEquals(progressTest, progress);
-  assertEquals(totalProgressTest, totalProgress);
-  assertEquals(timeTest, time);
-  assertEquals(deadlineTest, deadline);
+  ArrayList<NPC> teamTest = test.getTeam();
+  ArrayList<NPC> sickTest = test.getSick();
+  ArrayList<NPC> hireTest = test.getHire();
+  ArrayList<NPC> populationTest = test.getPopulation();
+  double budgetTest = test.getBudget();
+  double progressTest = test.getProgress();
+  double totalProgressTest = test.getTotalProgress();
+  int timeTest = test.getTime();
+  int deadlineTest = test.getDeadLine();
+  assertEquals(teamTest, test.team);
+  assertEquals(sickTest, test.sick);
+  assertEquals(hireTest, test.hire);
+  assertEquals(populationTest, test.population);
+  assertEquals(budgetTest, test.budget, 1);
+  assertEquals(progressTest, test.progress, 1);
+  assertEquals(totalProgressTest, test.totalProgress, 1);
+  assertEquals(timeTest, test.time);
+  assertEquals(deadlineTest, test.deadline);
  }
 
  @Test
  public void getTeamTest() {
-   assertEquals(game.getTeam(), team);
+   assertEquals(test.getTeam(), test.team);
  }
 
  @Test
  public void getHireTest() {
-  assertEquals(game.getHire(), hire);
+  assertEquals(test.getHire(), test.hire);
  }
 
  @Test
  public void getSickTest() {
-  assertEquals(game.getSick(), sick);
+  assertEquals(test.getSick(), test.sick);
  }
 
  @Test
  public void getPopulationTest() {
-  assertEquals(game.getPopulation(), population);
+  assertEquals(test.getPopulation(), test.population);
  }
 
  @Test
  public void getBudgetTest() {
-  assertEquals(game.getBudget(), budget);
+  assertEquals(test.getBudget(), test.budget, 1);
  }
 
  @Test
  public void getTimeTest() {
-  assertEquals(game.getTime(), time);
+  assertEquals(test.getTime(), test.time);
  }
 
  @Test
  public void getDeadLineTest() {
-  assertEquals(deadline, game.getDeadLine());
+  assertEquals(test.deadline, test.getDeadLine());
  }
 
  @Test
  public void getProgressTest() {
-  assertEquals(game.getProgress(), progress);
+  assertEquals(test.getProgress(), test.progress, 1);
  }
 
  @Test
  public void getTotalProgressTest() {
-  assertEquals( game.getTotalProgress(), totalProgress);
+  assertEquals(test.getTotalProgress(), test.totalProgress, 1);
  }
 
  @Test
  public void hireTest() {
-  assertTrue(hire());
+  assertTrue(test.hire(test.population.get(0)));
  }
 
  @Test
  public void test() {
-  assertTrue(fire());
+  assertTrue(test.fire(test.team.get(0)));
  }
 
  @Test
  public void checkRecoverTest() {
-  checkRecover();
-  for(int x = 0; x < sick.size(); x++)
-		{
-			if(sick.get(x).getLeave() != true) {
-				 fail("Someone should have recovered");
-			}
-		}
+  test.checkRecover();
+  for(int x = 0; x < test.sick.size(); x++)
+  {
+   if(test.sick.get(x).getLeave() != true) {
+     fail("Someone should have recovered");
+   }
+  }
  }
 
  @Test
  public void giveBreakTest() {
-   ArrayList<NPC> sickTest = game.getSick();
-   game.giveBreak(team.get(0));
-   ArrayList<NPC> sickTest2 = game.getSick();
-   assertNotEquals(sickTest2, sickTest);
+   ArrayList<NPC> sickTest = test.getSick();
+   test.giveBreak(test.team.get(0));
+   ArrayList<NPC> sickTest2 = test.getSick();
+   assertFalse("Break failed.", sickTest2.indexOf(test.team.get(0)) == (double)sickTest.indexOf(test.team.get(0)));
  }
 
  @Test
  public void deacreaseBudgetTest() {
-  assertEquals(deacreaseBudget(1), budget-1;
+  double testBudget = test.budget;
+  test.deacreaseBudget(1);
+  assertEquals(testBudget, test.budget+1, 1);
  }
 
  @Test
  public void newHireTest() {
-  ArrayList<NPC> hireTest = game.getHire();
-  newHire();
-  ArrayList<NPC> hireTest2 = game.getHire();
-  assertNotEquals(hireTest2, hireTest);
+  ArrayList<NPC> hireTest = test.getHire();
+  test.newHire();
+  ArrayList<NPC> hireTest2 = test.getHire();
+  assertFalse("New Hire failed.", hireTest2.equals(hireTest));
  }
 
  @Test
  public void updateTest() {
-  double budgetTest = game.getBudget();
-  double progressTest = game.getProgress();
-  int timeTest = game.getTime();
-  update();
-  double budgetTest2 = game.getBudget();
-  double progressTest2 = game.getProgress();
-  int timeTest2 = game.getTime();
-  assertNotEquals(progressTest2, progressTest);
-  assertNotEquals(timeTest2, timeTest);
-  assertNotEquals(budgetTest2, budgetTest);
+  double budgetTest = test.getBudget();
+  double progressTest = test.getProgress();
+  int timeTest = test.getTime();
+  test.update();
+  double budgetTest2 = test.getBudget();
+  double progressTest2 = test.getProgress();
+  int timeTest2 = test.getTime();
+  assertFalse("Progress did not change.", progressTest2 == progressTest);
+  assertFalse("Time did not change.", timeTest2 == timeTest);
+  assertFalse("Budget did not change.", budgetTest2 == budgetTest);
  }
 }

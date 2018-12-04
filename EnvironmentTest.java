@@ -81,15 +81,23 @@ public class EnvironmentTest {
   assertTrue(fire());
  }
 
-//To be implemented
  @Test
  public void checkRecoverTest() {
   checkRecover();
+  for(int x = 0; x < sick.size(); x++)
+		{
+			if(sick.get(x).getLeave() != true) {
+				 fail("Someone should have recovered");
+			}
+		}
  }
-//To be implemented
+
  @Test
  public void giveBreakTest() {
-
+   ArrayList<NPC> sickTest = game.getSick();
+   game.giveBreak(team.get(0));
+   ArrayList<NPC> sickTest2 = game.getSick();
+   assertNotEquals(sickTest2, sickTest);
  }
 
  @Test
@@ -97,21 +105,25 @@ public class EnvironmentTest {
   assertEquals(deacreaseBudget(1), budget-1;
  }
 
-//to be implemented
  @Test
  public void newHireTest() {
+  ArrayList<NPC> hireTest = game.getHire();
   newHire();
-  
- }
-//to be implemented
- @Test
- public void triggerEventTest() {
-  triggerEvent();
- }
-//to be implemented
- @Test
- public void updateTest() {
-  update();
+  ArrayList<NPC> hireTest2 = game.getHire();
+  assertNotEquals(hireTest2, hireTest);
  }
 
+ @Test
+ public void updateTest() {
+  double budgetTest = game.getBudget();
+  double progressTest = game.getProgress();
+  int timeTest = game.getTime();
+  update();
+  double budgetTest2 = game.getBudget();
+  double progressTest2 = game.getProgress();
+  int timeTest2 = game.getTime();
+  assertNotEquals(progressTest2, progressTest);
+  assertNotEquals(timeTest2, timeTest);
+  assertNotEquals(budgetTest2, budgetTest);
+ }
 }
